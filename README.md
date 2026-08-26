@@ -1,26 +1,81 @@
-**DEPARTMENT OF CSE-CyS,DS and AI&DS
-DEEP LEARNING APPLICATIONS -ELA-1**
+# Track 1 — Phishing & Malicious Email Classifier (Deep Learning ELA-1)
 
-**1. PROBLEM STATEMENT**
-You are tasked with building a Deep Learning-based pipeline that integrates with textual email data 
-(simulating a Gmail inbox environment). Your system must accept raw email text payloads and accurately 
-classify them into distinct operational categories to automate inbox management.
+Dept. of CSE- DS, Cys and AI&DS · Security-Focus Track.
 
-Choose ONE of the following implementations:
-- Track 1: Phishing & Malicious Email Classifier (Security Focus)
-- Track 2: Customer Sentiment & Urgency Router (Customer Experience Focus)
+**Name:** P. Adi Sai Vikranth · **Roll No:** 23071A67C0
 
-**2. TECHNICAL REQUIREMENTS & CONSTRAINTS**
-Dataset: You may use public datasets like the 'Enron Email Dataset' (Kaggle), 'SMS Spam Collection' 
-  adapted for emails, or generate a synthetic dataset of at least 1,500 labeled emails.
-Framework: Python 3.x using TensorFlow/Keras or PyTorch.
-Baseline Architecture: Implement at least one sequential model (LSTM or GRU) OR fine-tune a pre-trained 
-  Transformer model (BERT / DistilBERT from Hugging Face).
-Hardware Constraint: Utilize free-tier Google Colab (T4 GPU acceleration) for training if using Transformers.
+## Colab Notebook
+Colab Link: https://colab.research.google.com/drive/14uYCtU_U3eI4GYnsUrPZkwyRG7wPggDP?authuser=1#scrollTo=FDKquXfWMkiS
+End-to-end pipeline for phishing email detection using Deep Learning, including preprocessing, training, evaluation, and live inference.
 
-**3. DELIVERABLES**
-- Source Code: A Google Colab notebook link containing well-commented code, with public access enabled.
-Project Report: A concise 3-page PDF outlining:
-  * Abstract & Data Preprocessing workflow (Text cleaning, tokenisation, padding/truncation).
-  * Model Architecture Diagram and hyperparameter choices.
-  * Evaluation Metrics (Loss/Accuracy curves, Confusion Matrix, and F1-Score).
+## Files
+
+| File                                    | Purpose                                   |
+| --------------------------------------- | ----------------------------------------- |
+| `phishing_email_classifier_colab.ipynb` | Complete TensorFlow/Keras implementation. |
+| `phishing_email_classifier_report.pdf`  | 3-page project report.                    |
+| `synthetic_email_dataset.csv`           | 1,800 labelled synthetic emails.          |
+
+## Dataset
+
+The dataset contains **1,800 emails**:
+
+* 900 Legitimate
+* 900 Phishing/Malicious
+
+The dataset is generated programmatically and requires no external download.
+
+## Preprocessing
+
+```text
+Raw Email → Cleaning → Tokenisation → Encoding → Padding → Model
+```
+
+Email text is cleaned, tokenised, converted into integer sequences, and padded/truncated to a fixed length.
+
+## Model
+
+**Bidirectional LSTM (TensorFlow/Keras)**
+
+```text
+Embedding (64)
+      ↓
+BiLSTM (64)
+      ↓
+GlobalMaxPool1D
+      ↓
+Dropout (0.5)
+      ↓
+Dense (32, ReLU)
+      ↓
+Dropout (0.3)
+      ↓
+Sigmoid Output
+```
+
+**Optimizer:** Adam
+**Loss:** Binary Cross-Entropy
+**Early Stopping:** Patience = 3
+
+## Evaluation
+
+Metrics used:
+* Accuracy
+* Precision
+* Recall
+* F1-Score
+* Confusion Matrix
+* Loss & Accuracy Curves
+
+**Test F1-Score:** ~0.99 on the seeded synthetic dataset.
+
+> Performance on synthetic data does not represent real-world phishing detection accuracy.
+
+## Technologies
+
+**Python · TensorFlow/Keras · Google Colab · NumPy · Pandas · Scikit-learn · Matplotlib · Seaborn**
+
+## Author
+
+**P. Adi Sai Vikranth**
+**Roll No:** 23071A67C0
